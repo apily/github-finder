@@ -25,5 +25,8 @@
     "async": "*",
     "superagent": "*"
     },
-  "devDependencies": {}
+  "devDependencies": {
+    "mocha": "*",
+    "chai": "*"
+  }
 }

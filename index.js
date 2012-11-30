@@ -81,6 +81,8 @@ Finder.prototype.constructor = Finder;
 
 Finder.prototype.open = function(options, callback) {
   callback = callback || function() {};
+  var self = this;
+
   this.get(options, function() {
     self.emit('end');
     callback();
@@ -172,11 +174,11 @@ Finder.prototype.readdir = function(options, dir, callback) {
   var self = this;
 
   async.forEach(dir, function(item, callback) {
-    var options = {
+    var options_clone = {
       user: options.user,
       project: options.project,
       path: item.path
     };
-    self.get(options, callback);
+    self.get(options_clone, callback);
   }, callback);
 };
