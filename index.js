@@ -123,7 +123,7 @@ Finder.prototype.get = function(options, callback) {
         throw err;
       }
 
-      self.read(options, res, callback);
+      self.read(options, res.body, callback);
     });
 };
 
