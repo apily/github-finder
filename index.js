@@ -16,7 +16,7 @@ var join = require('path').join;
 
 var toString = {}.toString;
 
-exports = finder;
+module.exports = finder;
 
 /**
  * finder
@@ -32,6 +32,8 @@ exports = finder;
 function finder(options) {
   return new Finder(options);
 }
+
+finder.Finder = Finder;
 
 /**
  * Finder
