@@ -9,9 +9,9 @@
  * Module dependencies.
  */
 
-var Emitter = require('events').EventEmitter;
-var request = require('superagent')
+var request = require('superagent');
 var async = require('async');
+var Emitter = require('events').EventEmitter;
 var join = require('path').join;
 
 var toString = {}.toString;

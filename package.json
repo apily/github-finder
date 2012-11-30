@@ -21,6 +21,9 @@
   "engines": {
     "node": "*"
   },
-  "dependencies": {},
+  "dependencies": {
+    "async": "*",
+    "superagent": "*"
+    },
   "devDependencies": {}
 }
