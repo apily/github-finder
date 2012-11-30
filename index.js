@@ -9,7 +9,7 @@
  * Module dependencies.
  */
 
-var Emitter = require('emitter');
+var Emitter = require('events').EventEmitter;
 var request = require('superagent')
 var async = require('async');
 var join = require('path').join;
@@ -24,7 +24,7 @@ exports = finder;
  *
  * @param {Object} options options.
  *   @param {String} [client_id] GitHub application Client ID.
- *   @param {String} [client_id] GitHub application Client Secret. 
+ *   @param {String} [client_id] GitHub application Client Secret.
  * @return {Finder} finder.
  * @api public
  */
@@ -39,7 +39,7 @@ function finder(options) {
  *
  * @param {Object} options options.
  *   @param {String} [client_id] GitHub application Client ID.
- *   @param {String} [client_id] GitHub application Client Secret. 
+ *   @param {String} [client_id] GitHub application Client Secret.
  * @return {Finder} finder.
  * @api public
  */
@@ -52,7 +52,7 @@ function Finder(options) {
 
   if (client_id && client_secret) {
     this.credentials = {
-      client_id: client_id, 
+      client_id: client_id,
       client_secret: client_secret
     };
   }
@@ -78,6 +78,7 @@ Finder.prototype.constructor = Finder;
  */
 
 Finder.prototype.open = function(options, callback) {
+  callback = callback || function() {};
   this.get(options, function() {
     self.emit('end');
     callback();
@@ -99,7 +100,7 @@ Finder.prototype.open = function(options, callback) {
  * @api public
  */
 
-Finder.prototype.get = function (options, callback) {
+Finder.prototype.get = function(options, callback) {
   var self = this;
   var user = options.user;
   var project = options.project;
@@ -115,7 +116,7 @@ Finder.prototype.get = function (options, callback) {
   request
     .get(url)
     .query(query)
-    .end(function (err, res) {
+    .end(function(err, res) {
       if (err) {
         throw err;
       }
@@ -127,7 +128,7 @@ Finder.prototype.get = function (options, callback) {
 /**
  * read
  * Read the item
- * 
+ *
  * @param {Object} options options.
  *   @param {String} user user.
  *   @param {String} project project.
@@ -138,7 +139,7 @@ Finder.prototype.get = function (options, callback) {
  * @api public
  */
 
-Finder.prototype.read = function (options, item, callback) {
+Finder.prototype.read = function(options, item, callback) {
   var is_dir = '[object Array]' === toString.call(item);
 
   if (is_dir) {
@@ -151,10 +152,10 @@ Finder.prototype.read = function (options, item, callback) {
   callback();
 };
 
-/** 
+/**
  * readdir
  * Read directory information
- * 
+ *
  * @param {Object} options options.
  *   @param {String} user user.
  *   @param {String} project project.
